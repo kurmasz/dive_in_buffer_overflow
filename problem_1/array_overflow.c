@@ -7,6 +7,7 @@ typedef struct {
   char title[32];
 } Employee;
 
+/* Not used in favor of scanf */
 char* my_gets(char* str) {
   int index = 0;
   int c = getchar();
@@ -21,7 +22,7 @@ char* my_gets(char* str) {
 
 void update_name(Employee *emp) {
   printf("Enter the new name: ");
-  my_gets(emp->name);
+  scanf("%s", emp->name);
 }
 
 int main(int argc, char *argv[]) {
