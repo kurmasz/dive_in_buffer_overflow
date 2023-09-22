@@ -63,11 +63,11 @@ void edit_salary(Employee *emp)
 
 void edit_employees(Employee *employees, int can_edit_salary)
 {
-    char message1[8] = "ABCDEFG";
+    char message1[8] = "ABCDEFG";  /* "Dummy" data */
     int emp_num = 0;
     Employee* emp = NULL;
     int choice = -1;
-    char message2[8] = "abcdefg";
+    char message2[8] = "abcdefg"; /* "Dummy" data */
 
     printf("Enter number of employee to edit (or 999 to exit): ");
     emp_num = next_int();
