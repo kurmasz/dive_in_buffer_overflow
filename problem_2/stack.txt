@@ -1,0 +1,11 @@
+
+LLDB commands:
+    p/x $rsp
+    memory read -s8 -fx -c100 $rsp 
+
+
+
+main:    argc
+         argv    
+      0  employees
+        
