@@ -17,7 +17,7 @@ int next_int()
     while (getchar() != '\n')
         ;
     return ipt;
-}
+    }
 
 void my_strncpy(char* dest, char* src, int n) {
 
@@ -69,6 +69,11 @@ void edit_employees(Employee *employees, int can_edit_salary)
     int choice = -1;
     char message2[8] = "abcdefg"; /* "Dummy" data */
 
+
+    printf("e-1: %p\n", (void*)&(employees[-1]));
+    printf("can: %p\n", (void*)&can_edit_salary);
+    printf("e2t: %p\n", (void*)&(employees[-2].title));
+    printf("e-2: %p\n", (void*)&(employees[-2]));
     printf("Enter number of employee to edit (or 999 to exit): ");
     emp_num = next_int();
     while (emp_num != 999)
@@ -124,10 +129,9 @@ int main(int argc, char *argv[])
         {"Thomas Jefferson", 61143, "Third President"}};
 
 
-    printf("int: %lu\n", sizeof(int));
-    printf("Emp: %lu\\n", sizeof(Employee));
-    printf("array: %lu\n", sizeof(employees));
-
+    printf("emp: %lx\n", (void*)employees);
+    printf("arc: %lx\n", (void*)&argc);
+    printf("arv: %lx\n", (void*)&argv);
     edit_employees(employees, 0);
     printf("Good-bye.\n");
     return 0;
