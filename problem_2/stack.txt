@@ -2,7 +2,7 @@
 LLDB commands:
     p/x $rsp
     memory read -s8 -fx -c100 $rsp 
-
+    breakpoint set --file edit_employee.c -l 121
 
 
 main:    argc

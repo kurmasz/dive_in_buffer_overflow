@@ -63,12 +63,6 @@ void edit_salary(Employee *emp)
 
 void edit_employees(Employee *employees, int can_edit_salary)
 {
-    /* Note:  The intention of "message1" and "message2" below are to 
-       serve as "guideposts" so students can more easily see the 
-       effects of their actions.  However, clang allocated these 
-       strings to an unexpected spot on the stack, making them less
-       useful than I had hoped.
-    */
     char message1[8] = "ABCDEFG";  /* "Dummy" data */
     int emp_num = 0;
     Employee* emp = NULL;
@@ -93,9 +87,9 @@ void edit_employees(Employee *employees, int can_edit_salary)
         {
             printf("   (3) Salary\n");
         }
-        choice = next_int();
+        choice = next_int();  /* Set breakpoint here */
 
-        switch (choice)  /* Set breakpoint here */
+        switch (choice)
         {
         case 1:
             edit_name(emp);
@@ -128,6 +122,11 @@ int main(int argc, char *argv[])
         {"George Washington", 43615, "First President"},
         {"John Adams", 55134, "Second President"},
         {"Thomas Jefferson", 61143, "Third President"}};
+
+
+    printf("int: %lu\n", sizeof(int));
+    printf("Emp: %lu\\n", sizeof(Employee));
+    printf("array: %lu\n", sizeof(employees));
 
     edit_employees(employees, 0);
     printf("Good-bye.\n");

@@ -2,12 +2,10 @@ Before diving into the complexity of a traditional buffer overflow attack,
 let's begin by looking at a simpler case, where the effects of overwriting 
 the bounds of an array are limited to a single struct.
 
-Consider the C code in array_overflow.c:
+Consider the C code in array_overflow.c and a Little Endian machine:
 
 1. At a high level, what would happen if we wrote past the end of the 
    32-character array containing the Employee name?
-
-Little Endian:
 
 2. Run the program and enter a name that is exactly 32 characters long. 
    What is the resulting salary? Why?
@@ -17,9 +15,8 @@ Little Endian:
 
 4. You want to give yourself a raise, but not so much of a raise that 
    it arouses suspicion. Use a program like genEx.c to set your salary 
-   to $100,000.  Furthermore, if you use such a program, you can also 
-   enter a "normal" name (i.e., not a 32-character name with junk at 
-   the end.)
+   to $100,000.  (Try to enter a "normal" name rather than a 32-character 
+   name with junk at the end.)
 
 5. What is the smallest salary above $100,000 that you can give 
    yourself without using a program like genEx to pipe in unprintable 
@@ -33,7 +30,7 @@ Answers:
 
 2. $55,040. If the name is exactly 32 characters long, then the string's 
    null terminator ("\0") will get placed in the salary's least significant 
-   byte. In other words, the salary of "$0xd75e$ ill become "$0xd700" 
+   byte. In other words, the salary of "$0xd75e$ will become "$0xd700" 
 
 3. Here is one example that will work: "12345678901234567890123456789012A". 
    (In practice, you might be better off using a normal name followed by some 
@@ -43,8 +40,3 @@ Answers:
 
 5. If you place three tabs at the end of the name, you'll get a salary of $592,137.
    (Someone clever may come up with a smaller value.)
-
-
-
-
-
