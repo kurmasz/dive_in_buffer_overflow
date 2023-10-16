@@ -22,6 +22,7 @@ int next_int()
 void my_strncpy(char* dest, char* src, int n) {
 
     for (int i = 0; i < n; ++i) {
+      /* printf("%d %c\n", i, src[i]);*/
         dest[i] = src[i];
         if (src[i] == '\0') {
             break;
@@ -61,7 +62,7 @@ void edit_salary(Employee *emp)
     scanf("%d", &emp->salary);
 }
 
-void edit_employees(Employee *employees, int can_edit_salary)
+void edit_employees(int can_edit_salary, Employee *employees)
 {
     char message1[8] = "ABCDEFG";  /* "Dummy" data */
     int emp_num = 0;
@@ -69,11 +70,13 @@ void edit_employees(Employee *employees, int can_edit_salary)
     int choice = -1;
     char message2[8] = "abcdefg"; /* "Dummy" data */
 
-
-    printf("e-1: %p\n", (void*)&(employees[-1]));
-    printf("can: %p\n", (void*)&can_edit_salary);
-    printf("e2t: %p\n", (void*)&(employees[-2].title));
-    printf("e-2: %p\n", (void*)&(employees[-2]));
+    printf(" m1: %p %ld\n", (void*)message1, (void*)message1 - (void*)employees);
+        printf(" m2: %p %ld\n", (void*)message2, (void*)message2 - (void*)employees);
+    
+    printf("e-1: %p %ld\n", (void*)&(employees[-1]), (void*)&(employees[-1]) - (void*)employees);
+    printf("can: %p %ld\n", (void*)&can_edit_salary, (void*)&can_edit_salary - (void*)employees);
+printf("e2t: %p %ld\n", (void*)&(employees[-2].title), (void*)&(employees[-2].title) - (void*)employees);
+printf("e-2: %p %ld\n", (void*)&(employees[-2]), (void*)&(employees[-2]) - (void*)employees);
     printf("Enter number of employee to edit (or 999 to exit): ");
     emp_num = next_int();
     while (emp_num != 999)
@@ -114,6 +117,7 @@ void edit_employees(Employee *employees, int can_edit_salary)
 
         printf("Message 1: =>%s<=\n", message1);
         printf("Can edit salary: %d\n", can_edit_salary);
+	printf("Choice: %d\n", choice);
         printf("Message 2: =>%s<=\n", message2);
 
         printf("Enter number of employee to edit (or 999 to exit): ");
@@ -129,10 +133,10 @@ int main(int argc, char *argv[])
         {"Thomas Jefferson", 61143, "Third President"}};
 
 
-    printf("emp: %lx\n", (void*)employees);
-    printf("arc: %lx\n", (void*)&argc);
-    printf("arv: %lx\n", (void*)&argv);
-    edit_employees(employees, 0);
+    printf("emp: %p\n", (void*)employees);
+    printf("arc: %p\n", (void*)&argc);
+    printf("arv: %p\n", (void*)&argv);
+    edit_employees(0, employees);
     printf("Good-bye.\n");
     return 0;
 }
