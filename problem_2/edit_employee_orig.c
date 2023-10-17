@@ -19,14 +19,11 @@ int next_int()
     return ipt;
 }
 
-void my_strncpy(char *dest, char *src, int n)
-{
+void my_strncpy(char* dest, char* src, int n) {
 
-    for (int i = 0; i < n; ++i)
-    {
+    for (int i = 0; i < n; ++i) {
         dest[i] = src[i];
-        if (src[i] == '\0')
-        {
+        if (src[i] == '\0') {
             break;
         }
     }
@@ -64,12 +61,19 @@ void edit_salary(Employee *emp)
     scanf("%d", &emp->salary);
 }
 
-void edit_employees(Employee *employees, int can_edit_record, int can_edit_salary)
+void edit_employees(Employee *employees, int can_edit_salary)
 {
-    int emp_num = -2;
-    Employee *emp = NULL;
+    /* Note:  The intention of "message1" and "message2" below are to 
+       serve as "guideposts" so students can more easily see the 
+       effects of their actions.  However, clang allocated these 
+       strings to an unexpected spot on the stack, making them less
+       useful than I had hoped.
+    */
+    char message1[8] = "ABCDEFG";  /* "Dummy" data */
+    int emp_num = 0;
+    Employee* emp = NULL;
     int choice = -1;
-    int both_permissions = can_edit_record && can_edit_salary;
+    char message2[8] = "abcdefg"; /* "Dummy" data */
 
     printf("Enter number of employee to edit (or 999 to exit): ");
     emp_num = next_int();
@@ -82,27 +86,16 @@ void edit_employees(Employee *employees, int can_edit_record, int can_edit_salar
         printf("   Title:  %s\n", emp->title);
         printf("   Salary: %d\n", emp->salary);
 
-        printf("       emp: %p\n", emp);
-        printf("    target: %p  (%ld)\n", (void *)&both_permissions,(void *)&both_permissions - (void*)emp);
-        printf("    bottom: %p\n", (void*)&can_edit_salary);
-
-        while (1)
+        printf("What do you want to edit?\n");
+        printf("   (1) Name\n");
+        printf("   (2) Title\n");
+        if (can_edit_salary >= 1)
         {
-            printf("What do you want to edit?\n");
-            printf("   (1) Name\n");
-            printf("   (2) Title\n");
-            if (both_permissions)
-            {
-                printf("   (3) Salary\n");
-            }
-            choice = next_int();
-            if ((choice >= 1 && choice <= 2) || (choice == 3 && both_permissions))
-            {
-                break;
-            }
+            printf("   (3) Salary\n");
         }
+        choice = next_int();
 
-        switch (choice) /* Set breakpoint here */
+        switch (choice)  /* Set breakpoint here */
         {
         case 1:
             edit_name(emp);
@@ -120,7 +113,9 @@ void edit_employees(Employee *employees, int can_edit_record, int can_edit_salar
         printf("   Title:  %s\n", emp->title);
         printf("   Salary: %d\n", emp->salary);
 
+        printf("Message 1: =>%s<=\n", message1);
         printf("Can edit salary: %d\n", can_edit_salary);
+        printf("Message 2: =>%s<=\n", message2);
 
         printf("Enter number of employee to edit (or 999 to exit): ");
         emp_num = next_int();
@@ -134,7 +129,7 @@ int main(int argc, char *argv[])
         {"John Adams", 55134, "Second President"},
         {"Thomas Jefferson", 61143, "Third President"}};
 
-    edit_employees(employees, 1, 0);
+    edit_employees(employees, 0);
     printf("Good-bye.\n");
     return 0;
 }

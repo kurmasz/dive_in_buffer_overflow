@@ -1,3 +1,6 @@
+Use virtual mak MAN21121
+xcode-select --install
+
 
 LLDB commands:
     p/x $rsp
