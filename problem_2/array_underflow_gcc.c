@@ -66,7 +66,8 @@ void edit_salary(Employee *emp)
 
 void edit_employees(int can_edit_record, int can_edit_salary, Employee *employees)
 {
-
+  /* The unusual initialization values is just to help students see where
+     on the stack the compiler places the variables */
     int emp_num = -3;
     Employee *emp = NULL;
     int both_permissions = -2;
@@ -84,11 +85,14 @@ void edit_employees(int can_edit_record, int can_edit_salary, Employee *employee
         printf("   Title:  %s\n", emp->title);
         printf("   Salary: %d\n", emp->salary);
 
-        printf("       emp: %p\n", emp);
-        printf("    target: %p  (%ld)\n", (void *)&both_permissions,(void *)&both_permissions - (void*)emp);
-        printf("    bottom: %p\n", (void*)&can_edit_salary);
-	printf("   pointer: %p\n", &employees);
-	
+	/* Printing these pointers will show what part of the "employee" 
+           must be edited */
+	/*
+        printf("   employee: %p\n", emp);
+        printf("     target: %p  (%ld)\n", (void *)&both_permissions,
+	       (void *)&both_permissions - (void*)emp);
+	*/
+
         while (1)
         {
             printf("What do you want to edit?\n");

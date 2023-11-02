@@ -1,31 +1,25 @@
-The program edit_employees.c allows users to edit employee information.
-However, the edit_employees function needs to be passed a non-zero value 
-for the second parameter in order for the user to be allowed to edit salaries.
-Let's see if we can get around that restriction and change salaries anyway.
+The program array_underflow_*.c allows users to edit employee information.
+However, the edit_employees function needs to be passed non-zero values 
+for can_edit_record and can_edit_salary in order for the user to be allowed
+to edit salaries. Let's see if we can get around that restriction and change
+salaries anyway.
 
 Notice that this program avoids scanf, and uses strncpy so as to avoid string
 buffer overflows.
 
 
-1. Draw a diagram of the stack contents when the program reachesthe switch 
+1. Draw a diagram of the stack contents when the program reaches the switch 
    statement for the first time.
 
 2. Even though string buffer overflows aren't possible, it is still possible
    to change an employee's salary.  Can you figure out how? 
-   * Hint #1: Look at the stack trace and carefully choose an "employee" to modify.
-   * Hint #2: It can be difficult to account for alignment on the stack. The "dummy" 
-     variables message1 and message2 will help you adjust your attack to account for
-     alignment .
+   * Hint: Look at the stack trace and carefully choose an "employee" to modify.
 
-3. Notice that line 92 says  "if (can_edit_salary >= 1)".  If the line were written
-   "if (can_edit_salary == 1)" --- which it probably should be -- could you still 
-   make your attack work?
-
-4. Notice that this code uses my_strncpy to copy strings.
+3. Notice that this code uses my_strncpy to copy strings.
    a. How does my_strncppy differ from the clib's strncpy?
    b. How does this difference affect the outcome of your attack?
 
-5. If your compiler includes stack protection, modify an "employee" in a way 
+4. If your compiler includes stack protection, modify an "employee" in a way 
    that trips this alarm and causes the program to be terminated.
 
 Answers:
@@ -35,11 +29,8 @@ Answers:
 2. Edit employee "-1". Editing this employee will modify the local variables in 
    edit_employees.
 
-3. Yes, but you would probably have to pipe the input into the program as we did in 
-   the previous problem.
-
-4a. clib's strncpy will fill the remaining bytes in the target array with 0s.
-4b. This thwarts our attack because the extra 0s end up overwriting the function's 
+3a. clib's strncpy will fill the remaining bytes in the target array with 0s.
+3b. This thwarts our attack because the extra 0s end up overwriting the function's 
     return address and/or stack check, resulting in a seg fault.
 
 =====
@@ -78,8 +69,6 @@ stack    addr as shown
 
 Answer to #1 when compiled using gcc on an x86 running Linux
 Notice that the placement of parameters on the stack  is not in the order they appear in the code.
-The idea of the "dummy" data was to help students see what parts of the stack were modified.  However,
-since the parameters weren't placed in order, these "guideposts" may not be as useful as I had hoped.
 
 
 stack    addr as shown
