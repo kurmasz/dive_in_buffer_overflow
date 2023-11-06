@@ -73,7 +73,6 @@ void edit_employees(int can_edit_record, int can_edit_salary, Employee *employee
     int both_permissions = -2;
     int choice = -1;
     both_permissions = can_edit_record && can_edit_salary;
-    // printf("&emp: %p\n", &emp);
     
     printf("Enter number of employee to edit (or 999 to exit): ");
     emp_num = next_int();
@@ -87,12 +86,17 @@ void edit_employees(int can_edit_record, int can_edit_salary, Employee *employee
         printf("   Salary: %d\n", emp->salary);
 
 	/* Printing these pointers will show what part of the "employee" 
-           must be edited */
-	
+           must be edited. HOWEVER: Adding thesse lines changes the
+           amount of unused space between main and edit_employees on the stack.
+	   Also, when these lines are commented out, edit_employees doesn't appear
+	   to have a stack check, but it does when these lines are included. 
+	 */
+
+	/*
         printf("   employee: %p\n", emp);
-        printf("     target: %p  (%ld)\n", (void *)&both_permissions,
+	printf("     target: %p  (%ld)\n", (void *)&both_permissions,
 	       (void *)&both_permissions - (void*)emp);
-	
+	*/
 
         while (1)
         {
@@ -128,7 +132,7 @@ void edit_employees(int can_edit_record, int can_edit_salary, Employee *employee
         printf("   Title:  %s\n", emp->title);
         printf("   Salary: %d\n", emp->salary);
 
-        printf("Can edit salary: %d\n", both_permissions);
+        printf("Can edit salary: %d (0x%x)\n", both_permissions, both_permissions);
 
         printf("Enter number of employee to edit (or 999 to exit): ");
         emp_num = next_int();

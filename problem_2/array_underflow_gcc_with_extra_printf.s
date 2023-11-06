@@ -2,6 +2,13 @@
 	.text
 .Ltext0:
 	.file 0 "/home/kurmasz/DiveIntoSystems/dive_in_buffer_overflow/problem_2" "array_underflow_gcc.c"
+	.globl	diff
+	.bss
+	.align 8
+	.type	diff, @object
+	.size	diff, 8
+diff:
+	.zero	8
 	.section	.rodata
 .LC0:
 	.string	"%d"
@@ -11,7 +18,7 @@
 next_int:
 .LFB0:
 	.file 1 "array_underflow_gcc.c"
-	.loc 1 14 1
+	.loc 1 16 1
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -20,28 +27,28 @@ next_int:
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
 	subq	$16, %rsp
-	.loc 1 14 1
+	.loc 1 16 1
 	movq	%fs:40, %rax
 	movq	%rax, -8(%rbp)
 	xorl	%eax, %eax
-	.loc 1 16 5
+	.loc 1 18 5
 	leaq	-12(%rbp), %rax
 	movq	%rax, %rsi
 	leaq	.LC0(%rip), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	__isoc99_scanf@PLT
-	.loc 1 17 11
+	.loc 1 19 11
 	nop
 .L2:
-	.loc 1 17 12 discriminator 1
+	.loc 1 19 12 discriminator 1
 	call	getchar@PLT
-	.loc 1 17 22 discriminator 1
+	.loc 1 19 22 discriminator 1
 	cmpl	$10, %eax
 	jne	.L2
-	.loc 1 19 12
+	.loc 1 21 12
 	movl	-12(%rbp), %eax
-	.loc 1 20 1
+	.loc 1 22 1
 	movq	-8(%rbp), %rdx
 	subq	%fs:40, %rdx
 	je	.L4
@@ -57,7 +64,7 @@ next_int:
 	.type	my_strncpy, @function
 my_strncpy:
 .LFB1:
-	.loc 1 23 1
+	.loc 1 25 1
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -69,51 +76,51 @@ my_strncpy:
 	movq	%rsi, -32(%rbp)
 	movl	%edx, -36(%rbp)
 .LBB2:
-	.loc 1 25 14
+	.loc 1 27 14
 	movl	$0, -4(%rbp)
-	.loc 1 25 5
+	.loc 1 27 5
 	jmp	.L6
 .L9:
-	.loc 1 27 22
+	.loc 1 29 22
 	movl	-4(%rbp), %eax
 	movslq	%eax, %rdx
 	movq	-32(%rbp), %rax
 	addq	%rdx, %rax
-	.loc 1 27 13
+	.loc 1 29 13
 	movl	-4(%rbp), %edx
 	movslq	%edx, %rcx
 	movq	-24(%rbp), %rdx
 	addq	%rcx, %rdx
-	.loc 1 27 22
+	.loc 1 29 22
 	movzbl	(%rax), %eax
-	.loc 1 27 17
+	.loc 1 29 17
 	movb	%al, (%rdx)
-	.loc 1 28 16
+	.loc 1 30 16
 	movl	-4(%rbp), %eax
 	movslq	%eax, %rdx
 	movq	-32(%rbp), %rax
 	addq	%rdx, %rax
 	movzbl	(%rax), %eax
-	.loc 1 28 12
+	.loc 1 30 12
 	testb	%al, %al
 	je	.L10
-	.loc 1 25 28 discriminator 2
+	.loc 1 27 28 discriminator 2
 	addl	$1, -4(%rbp)
 .L6:
-	.loc 1 25 23 discriminator 1
+	.loc 1 27 23 discriminator 1
 	movl	-4(%rbp), %eax
 	cmpl	-36(%rbp), %eax
 	jl	.L9
 .LBE2:
-	.loc 1 33 1
+	.loc 1 35 1
 	jmp	.L11
 .L10:
 .LBB3:
-	.loc 1 30 13
+	.loc 1 32 13
 	nop
 .L11:
 .LBE3:
-	.loc 1 33 1
+	.loc 1 35 1
 	nop
 	popq	%rbp
 	.cfi_def_cfa 7, 8
@@ -125,7 +132,7 @@ my_strncpy:
 	.type	next_line, @function
 next_line:
 .LFB2:
-	.loc 1 38 1
+	.loc 1 40 1
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -136,43 +143,43 @@ next_line:
 	subq	$32, %rsp
 	movq	%rdi, -24(%rbp)
 	movl	%esi, -28(%rbp)
-	.loc 1 40 5
+	.loc 1 42 5
 	movq	stdin(%rip), %rax
 	movq	%rax, %rdx
 	movl	$1024, %esi
 	leaq	buffer.0(%rip), %rax
 	movq	%rax, %rdi
 	call	fgets@PLT
-	.loc 1 41 16
+	.loc 1 43 16
 	leaq	buffer.0(%rip), %rax
 	movq	%rax, %rdi
 	call	strlen@PLT
-	.loc 1 41 31
+	.loc 1 43 31
 	subl	$1, %eax
-	.loc 1 41 9
+	.loc 1 43 9
 	movl	%eax, -4(%rbp)
-	.loc 1 42 15
+	.loc 1 44 15
 	movl	-4(%rbp), %eax
 	cltq
 	leaq	buffer.0(%rip), %rdx
 	movzbl	(%rax,%rdx), %eax
-	.loc 1 42 8
+	.loc 1 44 8
 	cmpb	$10, %al
 	jne	.L13
-	.loc 1 44 22
+	.loc 1 46 22
 	movl	-4(%rbp), %eax
 	cltq
 	leaq	buffer.0(%rip), %rdx
 	movb	$0, (%rax,%rdx)
 .L13:
-	.loc 1 46 5
+	.loc 1 48 5
 	movl	-28(%rbp), %edx
 	movq	-24(%rbp), %rax
 	leaq	buffer.0(%rip), %rcx
 	movq	%rcx, %rsi
 	movq	%rax, %rdi
 	call	my_strncpy
-	.loc 1 47 1
+	.loc 1 49 1
 	nop
 	leave
 	.cfi_def_cfa 7, 8
@@ -188,7 +195,7 @@ next_line:
 	.type	edit_name, @function
 edit_name:
 .LFB3:
-	.loc 1 50 1
+	.loc 1 52 1
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -198,18 +205,18 @@ edit_name:
 	.cfi_def_cfa_register 6
 	subq	$16, %rsp
 	movq	%rdi, -8(%rbp)
-	.loc 1 51 5
+	.loc 1 53 5
 	leaq	.LC1(%rip), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	printf@PLT
-	.loc 1 52 18
+	.loc 1 54 18
 	movq	-8(%rbp), %rax
-	.loc 1 52 5
+	.loc 1 54 5
 	movl	$32, %esi
 	movq	%rax, %rdi
 	call	next_line
-	.loc 1 53 1
+	.loc 1 55 1
 	nop
 	leave
 	.cfi_def_cfa 7, 8
@@ -225,7 +232,7 @@ edit_name:
 	.type	edit_title, @function
 edit_title:
 .LFB4:
-	.loc 1 56 1
+	.loc 1 58 1
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -235,19 +242,19 @@ edit_title:
 	.cfi_def_cfa_register 6
 	subq	$16, %rsp
 	movq	%rdi, -8(%rbp)
-	.loc 1 57 5
+	.loc 1 59 5
 	leaq	.LC2(%rip), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	printf@PLT
-	.loc 1 58 18
+	.loc 1 60 18
 	movq	-8(%rbp), %rax
 	addq	$36, %rax
-	.loc 1 58 5
+	.loc 1 60 5
 	movl	$32, %esi
 	movq	%rax, %rdi
 	call	next_line
-	.loc 1 59 1
+	.loc 1 61 1
 	nop
 	leave
 	.cfi_def_cfa 7, 8
@@ -263,7 +270,7 @@ edit_title:
 	.type	edit_salary, @function
 edit_salary:
 .LFB5:
-	.loc 1 62 1
+	.loc 1 64 1
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -273,12 +280,12 @@ edit_salary:
 	.cfi_def_cfa_register 6
 	subq	$16, %rsp
 	movq	%rdi, -8(%rbp)
-	.loc 1 63 5
+	.loc 1 65 5
 	leaq	.LC3(%rip), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	printf@PLT
-	.loc 1 64 5
+	.loc 1 66 5
 	movq	-8(%rbp), %rax
 	addq	$32, %rax
 	movq	%rax, %rsi
@@ -286,7 +293,7 @@ edit_salary:
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	__isoc99_scanf@PLT
-	.loc 1 65 1
+	.loc 1 67 1
 	nop
 	leave
 	.cfi_def_cfa 7, 8
@@ -307,23 +314,27 @@ edit_salary:
 .LC8:
 	.string	"   Salary: %d\n"
 .LC9:
-	.string	"What do you want to edit?"
+	.string	"   employee: %p\n"
 .LC10:
-	.string	"   (1) Name"
+	.string	"     target: %p  (%ld)\n"
 .LC11:
-	.string	"   (2) Title"
+	.string	"What do you want to edit?"
 .LC12:
-	.string	"   (3) Salary"
+	.string	"   (1) Name"
 .LC13:
-	.string	"Updated employee: "
+	.string	"   (2) Title"
 .LC14:
-	.string	"Can edit salary: %d\n"
+	.string	"   (3) Salary"
+.LC15:
+	.string	"Updated employee: "
+.LC16:
+	.string	"Can edit salary: %d (0x%x)\n"
 	.text
 	.globl	edit_employees
 	.type	edit_employees, @function
 edit_employees:
 .LFB6:
-	.loc 1 68 1
+	.loc 1 70 1
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -335,222 +346,247 @@ edit_employees:
 	movl	%edi, -36(%rbp)
 	movl	%esi, -40(%rbp)
 	movq	%rdx, -48(%rbp)
-	.loc 1 71 9
-	movl	$-3, -20(%rbp)
-	.loc 1 72 15
-	movq	$0, -8(%rbp)
+	.loc 1 70 1
+	movq	%fs:40, %rax
+	movq	%rax, -8(%rbp)
+	xorl	%eax, %eax
 	.loc 1 73 9
-	movl	$-2, -16(%rbp)
-	.loc 1 74 9
-	movl	$-1, -12(%rbp)
-	.loc 1 75 40
+	movl	$-3, -24(%rbp)
+	.loc 1 74 15
+	movq	$0, -16(%rbp)
+	.loc 1 75 9
+	movl	$-2, -28(%rbp)
+	.loc 1 76 9
+	movl	$-1, -20(%rbp)
+	.loc 1 77 40
 	cmpl	$0, -36(%rbp)
 	je	.L18
-	.loc 1 75 40 is_stmt 0 discriminator 1
+	.loc 1 77 40 is_stmt 0 discriminator 1
 	cmpl	$0, -40(%rbp)
 	je	.L18
-	.loc 1 75 40 discriminator 3
+	.loc 1 77 40 discriminator 3
 	movl	$1, %eax
 	jmp	.L19
 .L18:
-	.loc 1 75 40 discriminator 4
+	.loc 1 77 40 discriminator 4
 	movl	$0, %eax
 .L19:
-	.loc 1 75 22 is_stmt 1 discriminator 6
-	movl	%eax, -16(%rbp)
-	.loc 1 77 5 discriminator 6
+	.loc 1 77 22 is_stmt 1 discriminator 6
+	movl	%eax, -28(%rbp)
+	.loc 1 80 5 discriminator 6
 	leaq	.LC4(%rip), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	printf@PLT
-	.loc 1 78 15 discriminator 6
+	.loc 1 81 15 discriminator 6
 	movl	$0, %eax
 	call	next_int
-	movl	%eax, -20(%rbp)
-	.loc 1 79 11 discriminator 6
+	movl	%eax, -24(%rbp)
+	.loc 1 82 11 discriminator 6
 	jmp	.L20
 .L30:
-	.loc 1 81 25
-	movl	-20(%rbp), %eax
+	.loc 1 84 25
+	movl	-24(%rbp), %eax
 	movslq	%eax, %rdx
 	movq	%rdx, %rax
 	salq	$4, %rax
 	addq	%rdx, %rax
 	salq	$2, %rax
 	movq	%rax, %rdx
-	.loc 1 81 13
+	.loc 1 84 13
 	movq	-48(%rbp), %rax
 	addq	%rdx, %rax
-	movq	%rax, -8(%rbp)
-	.loc 1 83 9
+	movq	%rax, -16(%rbp)
+	.loc 1 86 9
 	leaq	.LC5(%rip), %rax
 	movq	%rax, %rdi
 	call	puts@PLT
-	.loc 1 84 38
-	movq	-8(%rbp), %rax
-	.loc 1 84 9
+	.loc 1 87 38
+	movq	-16(%rbp), %rax
+	.loc 1 87 9
 	movq	%rax, %rsi
 	leaq	.LC6(%rip), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	printf@PLT
-	.loc 1 85 38
-	movq	-8(%rbp), %rax
+	.loc 1 88 38
+	movq	-16(%rbp), %rax
 	addq	$36, %rax
-	.loc 1 85 9
+	.loc 1 88 9
 	movq	%rax, %rsi
 	leaq	.LC7(%rip), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	printf@PLT
-	.loc 1 86 9
-	movq	-8(%rbp), %rax
+	.loc 1 89 9
+	movq	-16(%rbp), %rax
 	movl	32(%rax), %eax
 	movl	%eax, %esi
 	leaq	.LC8(%rip), %rax
+	movq	%rax, %rdi
+	movl	$0, %eax
+	call	printf@PLT
+	.loc 1 96 9
+	movq	-16(%rbp), %rax
+	movq	%rax, %rsi
+	leaq	.LC9(%rip), %rax
+	movq	%rax, %rdi
+	movl	$0, %eax
+	call	printf@PLT
+	.loc 1 97 2
+	leaq	-28(%rbp), %rax
+	subq	-16(%rbp), %rax
+	movq	%rax, %rdx
+	leaq	-28(%rbp), %rax
+	movq	%rax, %rsi
+	leaq	.LC10(%rip), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	printf@PLT
 .L25:
-	.loc 1 98 13
-	leaq	.LC9(%rip), %rax
-	movq	%rax, %rdi
-	call	puts@PLT
-	.loc 1 99 13
-	leaq	.LC10(%rip), %rax
-	movq	%rax, %rdi
-	call	puts@PLT
-	.loc 1 100 13
+	.loc 1 102 13
 	leaq	.LC11(%rip), %rax
 	movq	%rax, %rdi
 	call	puts@PLT
-	.loc 1 101 16
-	cmpl	$0, -16(%rbp)
-	je	.L21
-	.loc 1 103 17
+	.loc 1 103 13
 	leaq	.LC12(%rip), %rax
 	movq	%rax, %rdi
 	call	puts@PLT
-.L21:
-	.loc 1 105 22
-	movl	$0, %eax
-	call	next_int
-	movl	%eax, -12(%rbp)
-	.loc 1 106 16
-	cmpl	$0, -12(%rbp)
-	jle	.L22
-	.loc 1 106 30 discriminator 1
-	cmpl	$2, -12(%rbp)
-	jle	.L23
-.L22:
-	.loc 1 106 46 discriminator 3
-	cmpl	$3, -12(%rbp)
-	jne	.L25
-	.loc 1 106 62 discriminator 4
-	cmpl	$0, -16(%rbp)
-	jne	.L23
-	.loc 1 98 13
-	jmp	.L25
-.L23:
-	.loc 1 112 9
-	cmpl	$3, -12(%rbp)
-	je	.L26
-	cmpl	$3, -12(%rbp)
-	jg	.L27
-	cmpl	$1, -12(%rbp)
-	je	.L28
-	cmpl	$2, -12(%rbp)
-	je	.L29
-	jmp	.L27
-.L28:
-	.loc 1 115 13
-	movq	-8(%rbp), %rax
-	movq	%rax, %rdi
-	call	edit_name
-	.loc 1 116 13
-	jmp	.L27
-.L29:
-	.loc 1 118 13
-	movq	-8(%rbp), %rax
-	movq	%rax, %rdi
-	call	edit_title
-	.loc 1 119 13
-	jmp	.L27
-.L26:
-	.loc 1 121 13
-	movq	-8(%rbp), %rax
-	movq	%rax, %rdi
-	call	edit_salary
-	.loc 1 122 13
-	nop
-.L27:
-	.loc 1 125 9
+	.loc 1 104 13
 	leaq	.LC13(%rip), %rax
 	movq	%rax, %rdi
 	call	puts@PLT
-	.loc 1 126 38
-	movq	-8(%rbp), %rax
-	.loc 1 126 9
+	.loc 1 105 17
+	movl	-28(%rbp), %eax
+	.loc 1 105 16
+	testl	%eax, %eax
+	je	.L21
+	.loc 1 107 17
+	leaq	.LC14(%rip), %rax
+	movq	%rax, %rdi
+	call	puts@PLT
+.L21:
+	.loc 1 109 22
+	movl	$0, %eax
+	call	next_int
+	movl	%eax, -20(%rbp)
+	.loc 1 110 16
+	cmpl	$0, -20(%rbp)
+	jle	.L22
+	.loc 1 110 30 discriminator 1
+	cmpl	$2, -20(%rbp)
+	jle	.L23
+.L22:
+	.loc 1 110 46 discriminator 3
+	cmpl	$3, -20(%rbp)
+	jne	.L25
+	.loc 1 110 62 discriminator 4
+	movl	-28(%rbp), %eax
+	testl	%eax, %eax
+	jne	.L23
+	.loc 1 102 13
+	jmp	.L25
+.L23:
+	.loc 1 116 9
+	cmpl	$3, -20(%rbp)
+	je	.L26
+	cmpl	$3, -20(%rbp)
+	jg	.L27
+	cmpl	$1, -20(%rbp)
+	je	.L28
+	cmpl	$2, -20(%rbp)
+	je	.L29
+	jmp	.L27
+.L28:
+	.loc 1 119 13
+	movq	-16(%rbp), %rax
+	movq	%rax, %rdi
+	call	edit_name
+	.loc 1 120 13
+	jmp	.L27
+.L29:
+	.loc 1 122 13
+	movq	-16(%rbp), %rax
+	movq	%rax, %rdi
+	call	edit_title
+	.loc 1 123 13
+	jmp	.L27
+.L26:
+	.loc 1 125 13
+	movq	-16(%rbp), %rax
+	movq	%rax, %rdi
+	call	edit_salary
+	.loc 1 126 13
+	nop
+.L27:
+	.loc 1 129 9
+	leaq	.LC15(%rip), %rax
+	movq	%rax, %rdi
+	call	puts@PLT
+	.loc 1 130 38
+	movq	-16(%rbp), %rax
+	.loc 1 130 9
 	movq	%rax, %rsi
 	leaq	.LC6(%rip), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	printf@PLT
-	.loc 1 127 38
-	movq	-8(%rbp), %rax
+	.loc 1 131 38
+	movq	-16(%rbp), %rax
 	addq	$36, %rax
-	.loc 1 127 9
+	.loc 1 131 9
 	movq	%rax, %rsi
 	leaq	.LC7(%rip), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	printf@PLT
-	.loc 1 128 9
-	movq	-8(%rbp), %rax
+	.loc 1 132 9
+	movq	-16(%rbp), %rax
 	movl	32(%rax), %eax
 	movl	%eax, %esi
 	leaq	.LC8(%rip), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	printf@PLT
-	.loc 1 130 9
-	movl	-16(%rbp), %eax
+	.loc 1 134 9
+	movl	-28(%rbp), %edx
+	movl	-28(%rbp), %eax
 	movl	%eax, %esi
-	leaq	.LC14(%rip), %rax
+	leaq	.LC16(%rip), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	printf@PLT
-	.loc 1 132 9
+	.loc 1 136 9
 	leaq	.LC4(%rip), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	printf@PLT
-	.loc 1 133 19
+	.loc 1 137 19
 	movl	$0, %eax
 	call	next_int
-	movl	%eax, -20(%rbp)
+	movl	%eax, -24(%rbp)
 .L20:
-	.loc 1 79 20
-	cmpl	$999, -20(%rbp)
+	.loc 1 82 20
+	cmpl	$999, -24(%rbp)
 	jne	.L30
-	.loc 1 135 1
+	.loc 1 139 1
 	nop
-	nop
+	movq	-8(%rbp), %rax
+	subq	%fs:40, %rax
+	je	.L31
+	call	__stack_chk_fail@PLT
+.L31:
 	leave
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
 .LFE6:
 	.size	edit_employees, .-edit_employees
-	.section	.rodata
-.LC15:
-	.string	"Good-bye."
-	.text
 	.globl	main
 	.type	main, @function
 main:
 .LFB7:
-	.loc 1 138 1
+	.loc 1 142 1
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -561,11 +597,11 @@ main:
 	subq	$240, %rsp
 	movl	%edi, -228(%rbp)
 	movq	%rsi, -240(%rbp)
-	.loc 1 138 1
+	.loc 1 142 1
 	movq	%fs:40, %rax
 	movq	%rax, -8(%rbp)
 	xorl	%eax, %eax
-	.loc 1 139 14
+	.loc 1 144 12
 	movabsq	$6278129375530411335, %rax
 	movabsq	$8031157759420953441, %rdx
 	movq	%rax, -224(%rbp)
@@ -605,24 +641,20 @@ main:
 	movq	%rdx, -44(%rbp)
 	movq	$0, -36(%rbp)
 	movq	$0, -28(%rbp)
-	.loc 1 144 5
+	.loc 1 148 5
 	leaq	-224(%rbp), %rax
 	movq	%rax, %rdx
 	movl	$0, %esi
 	movl	$1, %edi
 	call	edit_employees
-	.loc 1 145 5
-	leaq	.LC15(%rip), %rax
-	movq	%rax, %rdi
-	call	puts@PLT
-	.loc 1 146 12
+	.loc 1 150 12
 	movl	$0, %eax
-	.loc 1 147 1
+	.loc 1 151 1
 	movq	-8(%rbp), %rdx
 	subq	%fs:40, %rdx
-	je	.L33
+	je	.L34
 	call	__stack_chk_fail@PLT
-.L33:
+.L34:
 	leave
 	.cfi_def_cfa 7, 8
 	ret
@@ -640,13 +672,13 @@ main:
 	.file 7 "/usr/include/string.h"
 	.section	.debug_info,"",@progbits
 .Ldebug_info0:
-	.long	0x5be
+	.long	0x5d4
 	.value	0x5
 	.byte	0x1
 	.byte	0x8
 	.long	.Ldebug_abbrev0
 	.uleb128 0x11
-	.long	.LASF73
+	.long	.LASF75
 	.byte	0x1d
 	.long	.LASF0
 	.long	.LASF1
@@ -716,7 +748,7 @@ main:
 	.uleb128 0x14
 	.long	0x96
 	.uleb128 0x15
-	.long	.LASF74
+	.long	.LASF76
 	.byte	0xd8
 	.byte	0x4
 	.byte	0x31
@@ -933,7 +965,7 @@ main:
 	.byte	0x19
 	.long	0xa2
 	.uleb128 0x16
-	.long	.LASF75
+	.long	.LASF77
 	.byte	0x4
 	.byte	0x2b
 	.byte	0xe
@@ -968,7 +1000,7 @@ main:
 	.byte	0x13
 	.byte	0
 	.uleb128 0x17
-	.long	.LASF76
+	.long	.LASF46
 	.byte	0x6
 	.byte	0x8f
 	.byte	0xe
@@ -980,74 +1012,83 @@ main:
 	.uleb128 0x2
 	.long	0x9d
 	.uleb128 0x18
-	.byte	0x44
-	.byte	0x1
-	.byte	0x4
-	.byte	0x9
-	.long	0x2d1
-	.uleb128 0x1
-	.long	.LASF46
-	.byte	0x1
-	.byte	0x6
-	.byte	0xa
-	.long	0x2d1
-	.byte	0
-	.uleb128 0x1
 	.long	.LASF47
 	.byte	0x1
-	.byte	0x7
+	.byte	0x4
+	.byte	0x6
+	.long	0x6d
+	.uleb128 0x9
+	.byte	0x3
+	.quad	diff
+	.uleb128 0x19
+	.byte	0x44
+	.byte	0x1
+	.byte	0x6
 	.byte	0x9
-	.long	0x66
-	.byte	0x20
+	.long	0x2e7
 	.uleb128 0x1
 	.long	.LASF48
 	.byte	0x1
 	.byte	0x8
 	.byte	0xa
-	.long	0x2d1
+	.long	0x2e7
+	.byte	0
+	.uleb128 0x1
+	.long	.LASF49
+	.byte	0x1
+	.byte	0x9
+	.byte	0x9
+	.long	0x66
+	.byte	0x20
+	.uleb128 0x1
+	.long	.LASF50
+	.byte	0x1
+	.byte	0xa
+	.byte	0xa
+	.long	0x2e7
 	.byte	0x24
 	.byte	0
 	.uleb128 0x9
 	.long	0x96
-	.long	0x2e1
+	.long	0x2f7
 	.uleb128 0xb
 	.long	0x3a
 	.byte	0x1f
 	.byte	0
 	.uleb128 0x8
-	.long	.LASF49
+	.long	.LASF51
 	.byte	0x1
-	.byte	0x9
+	.byte	0xb
 	.byte	0x3
-	.long	0x2a0
+	.long	0x2b6
 	.uleb128 0xd
-	.long	.LASF50
+	.long	.LASF52
 	.byte	0x6
 	.value	0x164
 	.byte	0xc
 	.long	0x66
-	.long	0x305
+	.long	0x31b
 	.uleb128 0x5
 	.long	0x29b
 	.uleb128 0x10
 	.byte	0
 	.uleb128 0xd
-	.long	.LASF51
+	.long	.LASF53
 	.byte	0x7
 	.value	0x197
 	.byte	0xf
 	.long	0x2e
-	.long	0x31c
+	.long	0x332
 	.uleb128 0x5
 	.long	0x29b
 	.byte	0
 	.uleb128 0xd
-	.long	.LASF52
+	.long	.LASF54
 	.byte	0x6
 	.value	0x250
 	.byte	0xe
 	.long	0x8c
-	.long	0x33d
+	.long	0x353
 	.uleb128 0x5
 	.long	0x91
 	.uleb128 0x5
@@ -1055,56 +1096,56 @@ main:
 	.uleb128 0x5
 	.long	0x296
 	.byte	0
-	.uleb128 0x19
-	.long	.LASF77
+	.uleb128 0x1a
+	.long	.LASF78
 	.byte	0x6
 	.value	0x208
 	.byte	0xc
 	.long	0x66
-	.uleb128 0x1a
-	.long	.LASF71
+	.uleb128 0x1b
+	.long	.LASF73
 	.byte	0x6
 	.value	0x1b5
 	.byte	0xc
-	.long	.LASF78
+	.long	.LASF79
 	.long	0x66
-	.long	0x366
+	.long	0x37c
 	.uleb128 0x5
 	.long	0x29b
 	.uleb128 0x10
 	.byte	0
-	.uleb128 0x1b
-	.long	.LASF79
+	.uleb128 0x1c
+	.long	.LASF80
 	.byte	0x1
-	.byte	0x89
+	.byte	0x8d
 	.byte	0x5
 	.long	0x66
 	.quad	.LFB7
 	.quad	.LFE7-.LFB7
 	.uleb128 0x1
 	.byte	0x9c
-	.long	0x3b6
+	.long	0x3cc
 	.uleb128 0x4
-	.long	.LASF53
-	.byte	0x89
+	.long	.LASF55
+	.byte	0x8d
 	.byte	0xe
 	.long	0x66
 	.uleb128 0x3
 	.byte	0x91
 	.sleb128 -244
 	.uleb128 0x4
-	.long	.LASF54
-	.byte	0x89
+	.long	.LASF56
+	.byte	0x8d
 	.byte	0x1a
-	.long	0x3b6
+	.long	0x3cc
 	.uleb128 0x3
 	.byte	0x91
 	.sleb128 -256
 	.uleb128 0x6
-	.long	.LASF57
-	.byte	0x8b
-	.byte	0xe
-	.long	0x3bb
+	.long	.LASF59
+	.byte	0x90
+	.byte	0xc
+	.long	0x3d1
 	.uleb128 0x3
 	.byte	0x91
 	.sleb128 -240
@@ -1112,141 +1153,141 @@ main:
 	.uleb128 0x2
 	.long	0x8c
 	.uleb128 0x9
-	.long	0x2e1
-	.long	0x3cb
+	.long	0x2f7
+	.long	0x3e1
 	.uleb128 0xb
 	.long	0x3a
 	.byte	0x2
 	.byte	0
 	.uleb128 0xa
-	.long	.LASF61
-	.byte	0x43
+	.long	.LASF63
+	.byte	0x45
 	.quad	.LFB6
 	.quad	.LFE6-.LFB6
 	.uleb128 0x1
 	.byte	0x9c
-	.long	0x44a
+	.long	0x460
 	.uleb128 0x4
-	.long	.LASF55
-	.byte	0x43
+	.long	.LASF57
+	.byte	0x45
 	.byte	0x19
 	.long	0x66
 	.uleb128 0x2
 	.byte	0x91
 	.sleb128 -52
 	.uleb128 0x4
-	.long	.LASF56
-	.byte	0x43
+	.long	.LASF58
+	.byte	0x45
 	.byte	0x2e
 	.long	0x66
 	.uleb128 0x2
 	.byte	0x91
 	.sleb128 -56
 	.uleb128 0x4
-	.long	.LASF57
-	.byte	0x43
+	.long	.LASF59
+	.byte	0x45
 	.byte	0x49
-	.long	0x44a
+	.long	0x460
 	.uleb128 0x2
 	.byte	0x91
 	.sleb128 -64
 	.uleb128 0x6
-	.long	.LASF58
-	.byte	0x47
+	.long	.LASF60
+	.byte	0x49
+	.byte	0x9
+	.long	0x66
+	.uleb128 0x2
+	.byte	0x91
+	.sleb128 -40
+	.uleb128 0xe
+	.string	"emp"
+	.byte	0x4a
+	.byte	0xf
+	.long	0x460
+	.uleb128 0x2
+	.byte	0x91
+	.sleb128 -32
+	.uleb128 0x6
+	.long	.LASF61
+	.byte	0x4b
+	.byte	0x9
+	.long	0x66
+	.uleb128 0x2
+	.byte	0x91
+	.sleb128 -44
+	.uleb128 0x6
+	.long	.LASF62
+	.byte	0x4c
 	.byte	0x9
 	.long	0x66
 	.uleb128 0x2
 	.byte	0x91
 	.sleb128 -36
-	.uleb128 0xe
-	.string	"emp"
-	.byte	0x48
-	.byte	0xf
-	.long	0x44a
-	.uleb128 0x2
-	.byte	0x91
-	.sleb128 -24
-	.uleb128 0x6
-	.long	.LASF59
-	.byte	0x49
-	.byte	0x9
-	.long	0x66
-	.uleb128 0x2
-	.byte	0x91
-	.sleb128 -32
-	.uleb128 0x6
-	.long	.LASF60
-	.byte	0x4a
-	.byte	0x9
-	.long	0x66
-	.uleb128 0x2
-	.byte	0x91
-	.sleb128 -28
 	.byte	0
 	.uleb128 0x2
-	.long	0x2e1
+	.long	0x2f7
 	.uleb128 0xa
-	.long	.LASF62
-	.byte	0x3d
+	.long	.LASF64
+	.byte	0x3f
 	.quad	.LFB5
 	.quad	.LFE5-.LFB5
 	.uleb128 0x1
 	.byte	0x9c
-	.long	0x47a
+	.long	0x490
 	.uleb128 0x7
 	.string	"emp"
-	.byte	0x3d
+	.byte	0x3f
 	.byte	0x1c
-	.long	0x44a
-	.uleb128 0x2
-	.byte	0x91
-	.sleb128 -24
-	.byte	0
-	.uleb128 0xa
-	.long	.LASF63
-	.byte	0x37
-	.quad	.LFB4
-	.quad	.LFE4-.LFB4
-	.uleb128 0x1
-	.byte	0x9c
-	.long	0x4a5
-	.uleb128 0x7
-	.string	"emp"
-	.byte	0x37
-	.byte	0x1b
-	.long	0x44a
-	.uleb128 0x2
-	.byte	0x91
-	.sleb128 -24
-	.byte	0
-	.uleb128 0xa
-	.long	.LASF64
-	.byte	0x31
-	.quad	.LFB3
-	.quad	.LFE3-.LFB3
-	.uleb128 0x1
-	.byte	0x9c
-	.long	0x4d0
-	.uleb128 0x7
-	.string	"emp"
-	.byte	0x31
-	.byte	0x1a
-	.long	0x44a
+	.long	0x460
 	.uleb128 0x2
 	.byte	0x91
 	.sleb128 -24
 	.byte	0
 	.uleb128 0xa
 	.long	.LASF65
-	.byte	0x25
+	.byte	0x39
+	.quad	.LFB4
+	.quad	.LFE4-.LFB4
+	.uleb128 0x1
+	.byte	0x9c
+	.long	0x4bb
+	.uleb128 0x7
+	.string	"emp"
+	.byte	0x39
+	.byte	0x1b
+	.long	0x460
+	.uleb128 0x2
+	.byte	0x91
+	.sleb128 -24
+	.byte	0
+	.uleb128 0xa
+	.long	.LASF66
+	.byte	0x33
+	.quad	.LFB3
+	.quad	.LFE3-.LFB3
+	.uleb128 0x1
+	.byte	0x9c
+	.long	0x4e6
+	.uleb128 0x7
+	.string	"emp"
+	.byte	0x33
+	.byte	0x1a
+	.long	0x460
+	.uleb128 0x2
+	.byte	0x91
+	.sleb128 -24
+	.byte	0
+	.uleb128 0xa
+	.long	.LASF67
+	.byte	0x27
 	.quad	.LFB2
 	.quad	.LFE2-.LFB2
 	.uleb128 0x1
 	.byte	0x9c
-	.long	0x52a
+	.long	0x540
 	.uleb128 0x4
-	.long	.LASF66
-	.byte	0x25
+	.long	.LASF68
+	.byte	0x27
 	.byte	0x16
 	.long	0x8c
 	.uleb128 0x2
@@ -1254,23 +1295,23 @@ main:
 	.sleb128 -40
 	.uleb128 0x7
 	.string	"n"
-	.byte	0x25
+	.byte	0x27
 	.byte	0x22
 	.long	0x66
 	.uleb128 0x2
 	.byte	0x91
 	.sleb128 -44
 	.uleb128 0x6
-	.long	.LASF67
-	.byte	0x27
+	.long	.LASF69
+	.byte	0x29
 	.byte	0x11
-	.long	0x52a
+	.long	0x540
 	.uleb128 0x9
 	.byte	0x3
 	.quad	buffer.0
 	.uleb128 0x6
-	.long	.LASF68
-	.byte	0x29
+	.long	.LASF70
+	.byte	0x2b
 	.byte	0x9
 	.long	0x66
 	.uleb128 0x2
@@ -1279,24 +1320,24 @@ main:
 	.byte	0
 	.uleb128 0x9
 	.long	0x96
-	.long	0x53b
-	.uleb128 0x1c
+	.long	0x551
+	.uleb128 0x1d
 	.long	0x3a
 	.value	0x3ff
 	.byte	0
-	.uleb128 0x1d
-	.long	.LASF69
+	.uleb128 0x1e
+	.long	.LASF71
 	.byte	0x1
-	.byte	0x16
+	.byte	0x18
 	.byte	0x6
 	.quad	.LFB1
 	.quad	.LFE1-.LFB1
 	.uleb128 0x1
 	.byte	0x9c
-	.long	0x594
+	.long	0x5aa
 	.uleb128 0x4
-	.long	.LASF70
-	.byte	0x16
+	.long	.LASF72
+	.byte	0x18
 	.byte	0x17
 	.long	0x8c
 	.uleb128 0x2
@@ -1304,7 +1345,7 @@ main:
 	.sleb128 -40
 	.uleb128 0x7
 	.string	"src"
-	.byte	0x16
+	.byte	0x18
 	.byte	0x23
 	.long	0x8c
 	.uleb128 0x2
@@ -1312,17 +1353,17 @@ main:
 	.sleb128 -48
 	.uleb128 0x7
 	.string	"n"
-	.byte	0x16
+	.byte	0x18
 	.byte	0x2c
 	.long	0x66
 	.uleb128 0x2
 	.byte	0x91
 	.sleb128 -52
-	.uleb128 0x1e
+	.uleb128 0x1f
 	.long	.LLRL0
 	.uleb128 0xe
 	.string	"i"
-	.byte	0x19
+	.byte	0x1b
 	.byte	0xe
 	.long	0x66
 	.uleb128 0x2
@@ -1330,10 +1371,10 @@ main:
 	.sleb128 -20
 	.byte	0
 	.byte	0
-	.uleb128 0x1f
-	.long	.LASF72
+	.uleb128 0x20
+	.long	.LASF74
 	.byte	0x1
-	.byte	0xd
+	.byte	0xf
 	.byte	0x5
 	.long	0x66
 	.quad	.LFB0
@@ -1342,7 +1383,7 @@ main:
 	.byte	0x9c
 	.uleb128 0xe
 	.string	"ipt"
-	.byte	0xf
+	.byte	0x11
 	.byte	0x9
 	.long	0x66
 	.uleb128 0x2
@@ -1669,6 +1710,25 @@ main:
 	.byte	0
 	.byte	0
 	.uleb128 0x18
+	.uleb128 0x34
+	.byte	0
+	.uleb128 0x3
+	.uleb128 0xe
+	.uleb128 0x3a
+	.uleb128 0xb
+	.uleb128 0x3b
+	.uleb128 0xb
+	.uleb128 0x39
+	.uleb128 0xb
+	.uleb128 0x49
+	.uleb128 0x13
+	.uleb128 0x3f
+	.uleb128 0x19
+	.uleb128 0x2
+	.uleb128 0x18
+	.byte	0
+	.byte	0
+	.uleb128 0x19
 	.uleb128 0x13
 	.byte	0x1
 	.uleb128 0xb
@@ -1683,7 +1743,7 @@ main:
 	.uleb128 0x13
 	.byte	0
 	.byte	0
-	.uleb128 0x19
+	.uleb128 0x1a
 	.uleb128 0x2e
 	.byte	0
 	.uleb128 0x3f
@@ -1704,7 +1764,7 @@ main:
 	.uleb128 0x19
 	.byte	0
 	.byte	0
-	.uleb128 0x1a
+	.uleb128 0x1b
 	.uleb128 0x2e
 	.byte	0x1
 	.uleb128 0x3f
@@ -1729,7 +1789,7 @@ main:
 	.uleb128 0x13
 	.byte	0
 	.byte	0
-	.uleb128 0x1b
+	.uleb128 0x1c
 	.uleb128 0x2e
 	.byte	0x1
 	.uleb128 0x3f
@@ -1758,7 +1818,7 @@ main:
 	.uleb128 0x13
 	.byte	0
 	.byte	0
-	.uleb128 0x1c
+	.uleb128 0x1d
 	.uleb128 0x21
 	.byte	0
 	.uleb128 0x49
@@ -1767,7 +1827,7 @@ main:
 	.uleb128 0x5
 	.byte	0
 	.byte	0
-	.uleb128 0x1d
+	.uleb128 0x1e
 	.uleb128 0x2e
 	.byte	0x1
 	.uleb128 0x3f
@@ -1794,14 +1854,14 @@ main:
 	.uleb128 0x13
 	.byte	0
 	.byte	0
-	.uleb128 0x1e
+	.uleb128 0x1f
 	.uleb128 0xb
 	.byte	0x1
 	.uleb128 0x55
 	.uleb128 0x17
 	.byte	0
 	.byte	0
-	.uleb128 0x1f
+	.uleb128 0x20
 	.uleb128 0x2e
 	.byte	0x1
 	.uleb128 0x3f
@@ -1861,13 +1921,15 @@ main:
 	.section	.debug_str,"MS",@progbits,1
 .LASF21:
 	.string	"_IO_buf_end"
-.LASF65:
+.LASF67:
 	.string	"next_line"
 .LASF29:
 	.string	"_old_offset"
-.LASF60:
+.LASF62:
 	.string	"choice"
-.LASF71:
+.LASF47:
+	.string	"diff"
+.LASF73:
 	.string	"scanf"
 .LASF24:
 	.string	"_IO_save_end"
@@ -1875,7 +1937,7 @@ main:
 	.string	"short int"
 .LASF9:
 	.string	"size_t"
-.LASF78:
+.LASF79:
 	.string	"__isoc99_scanf"
 .LASF34:
 	.string	"_offset"
@@ -1889,41 +1951,41 @@ main:
 	.string	"_markers"
 .LASF15:
 	.string	"_IO_read_end"
-.LASF73:
+.LASF75:
 	.string	"GNU C17 11.4.0 -mtune=generic -march=x86-64 -g -O0 -fasynchronous-unwind-tables -fstack-protector-strong -fstack-clash-protection -fcf-protection"
 .LASF38:
 	.string	"_freeres_buf"
-.LASF47:
+.LASF49:
 	.string	"salary"
-.LASF52:
+.LASF54:
 	.string	"fgets"
-.LASF48:
+.LASF50:
 	.string	"title"
-.LASF58:
+.LASF60:
 	.string	"emp_num"
-.LASF77:
+.LASF78:
 	.string	"getchar"
 .LASF33:
 	.string	"_lock"
 .LASF8:
 	.string	"long int"
-.LASF50:
+.LASF52:
 	.string	"printf"
 .LASF30:
 	.string	"_cur_column"
-.LASF70:
+.LASF72:
 	.string	"dest"
-.LASF54:
+.LASF56:
 	.string	"argv"
-.LASF46:
+.LASF48:
 	.string	"name"
-.LASF74:
+.LASF76:
 	.string	"_IO_FILE"
 .LASF4:
 	.string	"unsigned char"
-.LASF53:
+.LASF55:
 	.string	"argc"
-.LASF69:
+.LASF71:
 	.string	"my_strncpy"
 .LASF6:
 	.string	"signed char"
@@ -1939,7 +2001,7 @@ main:
 	.string	"_IO_write_base"
 .LASF41:
 	.string	"_unused2"
-.LASF68:
+.LASF70:
 	.string	"last"
 .LASF14:
 	.string	"_IO_read_ptr"
@@ -1947,13 +2009,13 @@ main:
 	.string	"short unsigned int"
 .LASF12:
 	.string	"char"
-.LASF62:
+.LASF64:
 	.string	"edit_salary"
-.LASF79:
+.LASF80:
 	.string	"main"
-.LASF51:
+.LASF53:
 	.string	"strlen"
-.LASF66:
+.LASF68:
 	.string	"target"
 .LASF36:
 	.string	"_wide_data"
@@ -1961,15 +2023,15 @@ main:
 	.string	"_freeres_list"
 .LASF39:
 	.string	"__pad5"
-.LASF67:
+.LASF69:
 	.string	"buffer"
 .LASF44:
 	.string	"_IO_codecvt"
-.LASF61:
+.LASF63:
 	.string	"edit_employees"
 .LASF2:
 	.string	"long unsigned int"
-.LASF49:
+.LASF51:
 	.string	"Employee"
 .LASF19:
 	.string	"_IO_write_end"
@@ -1983,9 +2045,9 @@ main:
 	.string	"_IO_wide_data"
 .LASF23:
 	.string	"_IO_backup_base"
-.LASF76:
+.LASF46:
 	.string	"stdin"
-.LASF59:
+.LASF61:
 	.string	"both_permissions"
 .LASF28:
 	.string	"_flags2"
@@ -1993,9 +2055,9 @@ main:
 	.string	"_mode"
 .LASF16:
 	.string	"_IO_read_base"
-.LASF55:
+.LASF57:
 	.string	"can_edit_record"
-.LASF64:
+.LASF66:
 	.string	"edit_name"
 .LASF31:
 	.string	"_vtable_offset"
@@ -2005,15 +2067,15 @@ main:
 	.string	"_fileno"
 .LASF42:
 	.string	"FILE"
-.LASF72:
+.LASF74:
 	.string	"next_int"
-.LASF57:
+.LASF59:
 	.string	"employees"
-.LASF63:
+.LASF65:
 	.string	"edit_title"
-.LASF75:
+.LASF77:
 	.string	"_IO_lock_t"
-.LASF56:
+.LASF58:
 	.string	"can_edit_salary"
 	.section	.debug_line_str,"MS",@progbits,1
 .LASF1:
