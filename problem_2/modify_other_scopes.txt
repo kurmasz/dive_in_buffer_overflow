@@ -1,8 +1,3 @@
-* Note:  Trying to figure out where gaps really are in gcc/arch output.
-  The "helpful" printf statement changes the allocation. Probably because of the
-  temp variable.  Try using a global.
-  */
-
 The program array_underflow_*.c allows users to edit employee information.
 However, the edit_employees function needs to be passed non-zero values 
 for can_edit_record and can_edit_salary in order for the user to be allowed
@@ -33,6 +28,8 @@ Answers:
 
 2. Edit employee "-1". Editing this employee will modify the local variables in 
    edit_employees.
+   * On x86/gcc edit the name and change character 21.
+   * On x86/gcc with the "hint" printfs uncommented, edit the name and change character 8.
 
 3a. clib's strncpy will fill the remaining bytes in the target array with 0s.
 3b. This thwarts our attack because the extra 0s end up overwriting the function's 
@@ -72,15 +69,22 @@ stack    addr as shown
 
 =====
 
-Answer to #1 when compiled using gcc on an x86 running Linux
+Answer to #1 when compiled using gcc on an x86 running Linux **with the extra printf commented out**.
+Assembly generated using gcc -Wall -O0 -g -S array_underflow_gcc.c with gcc version 11.4.0 (Ubuntu 11.4.0-1ubuntu1~22.04) 
+
 Notice that the placement of parameters on the stack  is not in the order they appear in the code.
+The compiler puts an unknown amount of padding on the stack between main and edit_employees. I tried to 
+determine this padding by adding some extra printfs; but, the presence of the printfs changed the padding.
+In addition, uncommenting the "helper" printfs on lines 96 and 97 causes the compiler to add a canary
+to edit_employees.  (It's not there if those two lines are commented out.)
 
 
 stack    addr as shown
          in assembly 
    0                         rsp when entering main 
   -8                         rbp pushed to begin main / rbp for main
- -16     main -8(rbp)        stack check for main 
+ -16     main  -8(rbp)       stack check for main 
+         main -24(rbp)       <appears to be unused>
                              employees[2]
                              employees[1]
                              employees[0]
@@ -88,14 +92,14 @@ stack    addr as shown
          main -228(rbp)      argc
          main -232(rbb)      <appears to be unused>   
 -248     main -240(rbp)      argv / rsp after setting up main
--256                         return address for edit_employees function (aka "edit")
--264			     <some 8 bytes between argv and emp appears unused.>
--272                         rbp pushed to begin edit_employees / rbp for "edit"
--280      edit  -8(rbp)      emp (local variable)
--284      edit -12(rbp)      choice (local variable)
--288      edit -16(rbp)      both_permissions (local variable)
--292      edit -20(rbp)      emp_num (local variable)
--304	  edit -32(rbp)      <apparantly unused>
--308	  edit -36(rbp)      can_edit_record parameter
--312      edit -40(rbp)      can_edit_salary parameter
--320      edit -48(rbp)      Employee* employees / rsp after setting up edit_employees  
+                             return address for edit_employees function (aka "edit")
+    			                 <some 8 bytes between argv and emp appears unused.>
+                             rbp pushed to begin edit_employees / rbp for "edit"
+          edit  -8(rbp)      emp (local variable)
+          edit -12(rbp)      choice (local variable)
+          edit -16(rbp)      both_permissions (local variable)
+          edit -20(rbp)      emp_num (local variable)
+    	    edit -32(rbp)      <apparently unused>
+    	    edit -36(rbp)      can_edit_record parameter
+          edit -40(rbp)      can_edit_salary parameter
+          edit -48(rbp)      Employee* employees / rsp after setting up edit_employees  
