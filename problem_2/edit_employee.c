@@ -25,6 +25,7 @@ void my_strncpy(char *dest, char *src, int n)
     for (int i = 0; i < n; ++i)
     {
         dest[i] = src[i];
+	printf("%p\n", &(dest[i]));
         if (src[i] == '\0')
         {
             break;
@@ -120,7 +121,7 @@ void edit_employees(Employee *employees, int can_edit_record, int can_edit_salar
         printf("   Title:  %s\n", emp->title);
         printf("   Salary: %d\n", emp->salary);
 
-        printf("Can edit salary: %d\n", can_edit_salary);
+        printf("Can edit salary: %d\n", both_permissions);
 
         printf("Enter number of employee to edit (or 999 to exit): ");
         emp_num = next_int();
