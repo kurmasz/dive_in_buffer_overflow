@@ -89,7 +89,7 @@ void edit_employees(int can_edit_record, int can_edit_salary, Employee *employee
            must be edited. HOWEVER: Adding thesse lines changes the
            amount of unused space between main and edit_employees on the stack.
 	   Also, when these lines are commented out, edit_employees doesn't appear
-	   to have a stack check, but it does when these lines are included. 
+	   to have a canary, but it does when these lines are included. 
 	 */
 
 	/*
