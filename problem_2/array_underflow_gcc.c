@@ -73,7 +73,8 @@ void edit_employees(int can_edit_record, int can_edit_salary, Employee *employee
     int both_permissions = -2;
     int choice = -1;
     both_permissions = can_edit_record && can_edit_salary;
-
+    // printf("&emp: %p\n", &emp);
+    
     printf("Enter number of employee to edit (or 999 to exit): ");
     emp_num = next_int();
     while (emp_num != 999)
@@ -87,11 +88,11 @@ void edit_employees(int can_edit_record, int can_edit_salary, Employee *employee
 
 	/* Printing these pointers will show what part of the "employee" 
            must be edited */
-	/*
+	
         printf("   employee: %p\n", emp);
         printf("     target: %p  (%ld)\n", (void *)&both_permissions,
 	       (void *)&both_permissions - (void*)emp);
-	*/
+	
 
         while (1)
         {
@@ -136,12 +137,12 @@ void edit_employees(int can_edit_record, int can_edit_salary, Employee *employee
 
 int main(int argc, char *argv[])
 {
-    Employee employees[] = {
+  //  printf("ARGV: %p\n", &argv);
+  Employee employees[] = {
         {"George Washington", 43615, "First President"},
         {"John Adams", 55134, "Second President"},
         {"Thomas Jefferson", 61143, "Third President"}};
-
     edit_employees(1, 0, employees);
-    printf("Good-bye.\n");
+    // printf("Good-bye.\n");
     return 0;
 }

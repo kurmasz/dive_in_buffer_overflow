@@ -358,19 +358,19 @@ edit_employees:
 .L19:
 	.loc 1 75 22 is_stmt 1 discriminator 6
 	movl	%eax, -16(%rbp)
-	.loc 1 78 5 discriminator 6
+	.loc 1 77 5 discriminator 6
 	leaq	.LC4(%rip), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	printf@PLT
-	.loc 1 79 15 discriminator 6
+	.loc 1 78 15 discriminator 6
 	movl	$0, %eax
 	call	next_int
 	movl	%eax, -20(%rbp)
-	.loc 1 80 11 discriminator 6
+	.loc 1 79 11 discriminator 6
 	jmp	.L20
 .L30:
-	.loc 1 82 25
+	.loc 1 81 25
 	movl	-20(%rbp), %eax
 	movslq	%eax, %rdx
 	movq	%rdx, %rax
@@ -378,32 +378,32 @@ edit_employees:
 	addq	%rdx, %rax
 	salq	$2, %rax
 	movq	%rax, %rdx
-	.loc 1 82 13
+	.loc 1 81 13
 	movq	-48(%rbp), %rax
 	addq	%rdx, %rax
 	movq	%rax, -8(%rbp)
-	.loc 1 84 9
+	.loc 1 83 9
 	leaq	.LC5(%rip), %rax
 	movq	%rax, %rdi
 	call	puts@PLT
-	.loc 1 85 38
+	.loc 1 84 38
 	movq	-8(%rbp), %rax
-	.loc 1 85 9
+	.loc 1 84 9
 	movq	%rax, %rsi
 	leaq	.LC6(%rip), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	printf@PLT
-	.loc 1 86 38
+	.loc 1 85 38
 	movq	-8(%rbp), %rax
 	addq	$36, %rax
-	.loc 1 86 9
+	.loc 1 85 9
 	movq	%rax, %rsi
 	leaq	.LC7(%rip), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	printf@PLT
-	.loc 1 87 9
+	.loc 1 86 9
 	movq	-8(%rbp), %rax
 	movl	32(%rax), %eax
 	movl	%eax, %esi
@@ -412,47 +412,47 @@ edit_employees:
 	movl	$0, %eax
 	call	printf@PLT
 .L25:
-	.loc 1 99 13
+	.loc 1 98 13
 	leaq	.LC9(%rip), %rax
 	movq	%rax, %rdi
 	call	puts@PLT
-	.loc 1 100 13
+	.loc 1 99 13
 	leaq	.LC10(%rip), %rax
 	movq	%rax, %rdi
 	call	puts@PLT
-	.loc 1 101 13
+	.loc 1 100 13
 	leaq	.LC11(%rip), %rax
 	movq	%rax, %rdi
 	call	puts@PLT
-	.loc 1 102 16
+	.loc 1 101 16
 	cmpl	$0, -16(%rbp)
 	je	.L21
-	.loc 1 104 17
+	.loc 1 103 17
 	leaq	.LC12(%rip), %rax
 	movq	%rax, %rdi
 	call	puts@PLT
 .L21:
-	.loc 1 106 22
+	.loc 1 105 22
 	movl	$0, %eax
 	call	next_int
 	movl	%eax, -12(%rbp)
-	.loc 1 107 16
+	.loc 1 106 16
 	cmpl	$0, -12(%rbp)
 	jle	.L22
-	.loc 1 107 30 discriminator 1
+	.loc 1 106 30 discriminator 1
 	cmpl	$2, -12(%rbp)
 	jle	.L23
 .L22:
-	.loc 1 107 46 discriminator 3
+	.loc 1 106 46 discriminator 3
 	cmpl	$3, -12(%rbp)
 	jne	.L25
-	.loc 1 107 62 discriminator 4
+	.loc 1 106 62 discriminator 4
 	cmpl	$0, -16(%rbp)
 	jne	.L23
-	.loc 1 99 13
+	.loc 1 98 13
 	jmp	.L25
 .L23:
-	.loc 1 113 9
+	.loc 1 112 9
 	cmpl	$3, -12(%rbp)
 	je	.L26
 	cmpl	$3, -12(%rbp)
@@ -463,49 +463,49 @@ edit_employees:
 	je	.L29
 	jmp	.L27
 .L28:
-	.loc 1 116 13
+	.loc 1 115 13
 	movq	-8(%rbp), %rax
 	movq	%rax, %rdi
 	call	edit_name
-	.loc 1 117 13
+	.loc 1 116 13
 	jmp	.L27
 .L29:
-	.loc 1 119 13
+	.loc 1 118 13
 	movq	-8(%rbp), %rax
 	movq	%rax, %rdi
 	call	edit_title
-	.loc 1 120 13
+	.loc 1 119 13
 	jmp	.L27
 .L26:
-	.loc 1 122 13
+	.loc 1 121 13
 	movq	-8(%rbp), %rax
 	movq	%rax, %rdi
 	call	edit_salary
-	.loc 1 123 13
+	.loc 1 122 13
 	nop
 .L27:
-	.loc 1 126 9
+	.loc 1 125 9
 	leaq	.LC13(%rip), %rax
 	movq	%rax, %rdi
 	call	puts@PLT
-	.loc 1 127 38
+	.loc 1 126 38
 	movq	-8(%rbp), %rax
-	.loc 1 127 9
+	.loc 1 126 9
 	movq	%rax, %rsi
 	leaq	.LC6(%rip), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	printf@PLT
-	.loc 1 128 38
+	.loc 1 127 38
 	movq	-8(%rbp), %rax
 	addq	$36, %rax
-	.loc 1 128 9
+	.loc 1 127 9
 	movq	%rax, %rsi
 	leaq	.LC7(%rip), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	printf@PLT
-	.loc 1 129 9
+	.loc 1 128 9
 	movq	-8(%rbp), %rax
 	movl	32(%rax), %eax
 	movl	%eax, %esi
@@ -513,27 +513,27 @@ edit_employees:
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	printf@PLT
-	.loc 1 131 9
+	.loc 1 130 9
 	movl	-16(%rbp), %eax
 	movl	%eax, %esi
 	leaq	.LC14(%rip), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	printf@PLT
-	.loc 1 133 9
+	.loc 1 132 9
 	leaq	.LC4(%rip), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	printf@PLT
-	.loc 1 134 19
+	.loc 1 133 19
 	movl	$0, %eax
 	call	next_int
 	movl	%eax, -20(%rbp)
 .L20:
-	.loc 1 80 20
+	.loc 1 79 20
 	cmpl	$999, -20(%rbp)
 	jne	.L30
-	.loc 1 136 1
+	.loc 1 135 1
 	nop
 	nop
 	leave
@@ -542,11 +542,15 @@ edit_employees:
 	.cfi_endproc
 .LFE6:
 	.size	edit_employees, .-edit_employees
+	.section	.rodata
+.LC15:
+	.string	"Good-bye."
+	.text
 	.globl	main
 	.type	main, @function
 main:
 .LFB7:
-	.loc 1 139 1
+	.loc 1 138 1
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -557,11 +561,11 @@ main:
 	subq	$240, %rsp
 	movl	%edi, -228(%rbp)
 	movq	%rsi, -240(%rbp)
-	.loc 1 139 1
+	.loc 1 138 1
 	movq	%fs:40, %rax
 	movq	%rax, -8(%rbp)
 	xorl	%eax, %eax
-	.loc 1 141 12
+	.loc 1 139 14
 	movabsq	$6278129375530411335, %rax
 	movabsq	$8031157759420953441, %rdx
 	movq	%rax, -224(%rbp)
@@ -601,15 +605,19 @@ main:
 	movq	%rdx, -44(%rbp)
 	movq	$0, -36(%rbp)
 	movq	$0, -28(%rbp)
-	.loc 1 145 5
+	.loc 1 144 5
 	leaq	-224(%rbp), %rax
 	movq	%rax, %rdx
 	movl	$0, %esi
 	movl	$1, %edi
 	call	edit_employees
-	.loc 1 147 12
+	.loc 1 145 5
+	leaq	.LC15(%rip), %rax
+	movq	%rax, %rdi
+	call	puts@PLT
+	.loc 1 146 12
 	movl	$0, %eax
-	.loc 1 148 1
+	.loc 1 147 1
 	movq	-8(%rbp), %rdx
 	subq	%fs:40, %rdx
 	je	.L33
@@ -1068,7 +1076,7 @@ main:
 	.uleb128 0x1b
 	.long	.LASF79
 	.byte	0x1
-	.byte	0x8a
+	.byte	0x89
 	.byte	0x5
 	.long	0x66
 	.quad	.LFB7
@@ -1078,7 +1086,7 @@ main:
 	.long	0x3b6
 	.uleb128 0x4
 	.long	.LASF53
-	.byte	0x8a
+	.byte	0x89
 	.byte	0xe
 	.long	0x66
 	.uleb128 0x3
@@ -1086,7 +1094,7 @@ main:
 	.sleb128 -244
 	.uleb128 0x4
 	.long	.LASF54
-	.byte	0x8a
+	.byte	0x89
 	.byte	0x1a
 	.long	0x3b6
 	.uleb128 0x3
@@ -1094,8 +1102,8 @@ main:
 	.sleb128 -256
 	.uleb128 0x6
 	.long	.LASF57
-	.byte	0x8d
-	.byte	0xc
+	.byte	0x8b
+	.byte	0xe
 	.long	0x3bb
 	.uleb128 0x3
 	.byte	0x91

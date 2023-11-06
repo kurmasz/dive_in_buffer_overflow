@@ -1,3 +1,8 @@
+* Note:  Trying to figure out where gaps really are in gcc/arch output.
+  The "helpful" printf statement changes the allocation. Probably because of the
+  temp variable.  Try using a global.
+  */
+
 The program array_underflow_*.c allows users to edit employee information.
 However, the edit_employees function needs to be passed non-zero values 
 for can_edit_record and can_edit_salary in order for the user to be allowed
@@ -81,16 +86,16 @@ stack    addr as shown
                              employees[0]
 -232     main -224(rbp)      Beginning of employee array
          main -228(rbp)      argc
-    
+         main -232(rbb)      <appears to be unused>   
 -248     main -240(rbp)      argv / rsp after setting up main
--256                         return address for edit_employees function ("edit")
--264                         rbp pushed to begin edit_employees / rbp for "edit"
--272        edit -8(rbp)      stack check for "edit"
--280       edit -16(rbp)      message2 
--288       edit -24(rbp)      message1
--296       edit -32(rbp)      Employee array pointer parameter
--300       edit -36(rbp)      can_edit_salary parameter
-           edit -40(rbp)      emp_num
-           edit -56(rbp)      emp Employee*
-           edit -60(rbp)      choice
--328      edit -64(rbp)      rsp after setting up edit_employees  
+-256                         return address for edit_employees function (aka "edit")
+-264			     <some 8 bytes between argv and emp appears unused.>
+-272                         rbp pushed to begin edit_employees / rbp for "edit"
+-280      edit  -8(rbp)      emp (local variable)
+-284      edit -12(rbp)      choice (local variable)
+-288      edit -16(rbp)      both_permissions (local variable)
+-292      edit -20(rbp)      emp_num (local variable)
+-304	  edit -32(rbp)      <apparantly unused>
+-308	  edit -36(rbp)      can_edit_record parameter
+-312      edit -40(rbp)      can_edit_salary parameter
+-320      edit -48(rbp)      Employee* employees / rsp after setting up edit_employees  
