@@ -86,16 +86,16 @@ void edit_employees(int can_edit_record, int can_edit_salary, Employee *employee
         printf("   Salary: %d\n", emp->salary);
 
 	/* Printing these pointers will show what part of the "employee" 
-           must be edited. HOWEVER: Adding thesse lines changes the
-           amount of unused space between main and edit_employees on the stack.
-	   Also, when these lines are commented out, edit_employees doesn't appear
-	   to have a canary, but it does when these lines are included. 
+       must be edited. HOWEVER: Adding these lines changes the
+       amount of unused space between main and edit_employees on the stack.
+       Also, when these lines are commented out, edit_employees doesn't appear
+       to have a canary, but it does when these lines are included. 
 	 */
 
 	/*
         printf("   employee: %p\n", emp);
-	printf("     target: %p  (%ld)\n", (void *)&both_permissions,
-	       (void *)&both_permissions - (void*)emp);
+        printf("     target: %p  (%ld)\n", (void *)&both_permissions,
+                    (void *)&both_permissions - (void*)emp);
 	*/
 
         while (1)
