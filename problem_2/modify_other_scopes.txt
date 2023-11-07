@@ -25,10 +25,16 @@ Answers:
 
 1. See below
 
-2. Edit employee "-1". Editing this employee will modify the local variables in 
-   edit_employees.
-   * On x86/gcc edit the name and change character 21.
-   * On x86/gcc with the "hint" printfs uncommented, edit the name and change character 8.
+2. * For x86/gcc (I used a Linux box)
+     Edit employee "-1". Editing this employee will modify the local variables in 
+     edit_employees. In particular, edit the name and change character 21.
+     * If the "hint" printfs on lines 96 and 97 are uncommented, edit the name 
+       and change character 8. (I don't know why adding these lines changes how 
+       data is allocated on the stack.)
+   * For the M1 (the ARM processor in newer Macs) and clang
+     Edit employee "-2".  Editing this employee will modify the local variables in 
+     edit_employees. In particular, edit the title and change character 5.
+
 
 3a. clib's strncpy will fill the remaining bytes in the target array with 0s.
 3b. This thwarts our attack because the extra 0s end up overwriting the function's 
@@ -116,4 +122,7 @@ stack    addr as shown
           edit  0(sp)      <apparently unused 12 bytes>
   -368                     sp after entering edit_employee (if no extra space) 
        
-*** Location of "employee[-1]" if no stack alignment. 
+*** Location of "employee[-1]" **if** no stack alignment/padding. 
+However, there appears to be blank space in the stack (alignment? protection?)
+because, when we un-comment lines 96 and 97, we see that the beginning of 
+"employee[-1] is actually 28 _below_ the location of can_edit_salary.
