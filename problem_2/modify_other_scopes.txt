@@ -103,3 +103,50 @@ stack    addr as shown
     	    edit -36(rbp)      can_edit_record parameter
           edit -40(rbp)      can_edit_salary parameter
           edit -48(rbp)      Employee* employees / rsp after setting up edit_employees  
+
+
+=====
+
+Answer to #1 when compiled using clang on an M1 running MacOS with the extra printf commented out. 
+(Although, that doesn't appear to matter on this platform.)
+Assembly generated using gcc -Wall -O0 -g -S array_underflow_gcc.c with Apple clang version 15.0.0 (clang-1500.0.40.1)
+
+Notice that the placement of parameters on the stack  is not in the order they appear in the code.
+The compiler puts an unknown amount of padding on the stack between main and edit_employees. I tried to 
+determine this padding by adding some extra printfs; but, the presence of the printfs changed the padding.
+In addition, uncommenting the "helper" printfs on lines 96 and 97 causes the compiler to add a canary
+to edit_employees.  (It's not there if those two lines are commented out.)
+
+
+stack    addr as shown
+         in assembly 
+   0                        sp when entering main 
+         main 280(sp)       Preserve x30 (Return address)
+         main 272(sp)       Preserve x29 (Frame pointer)
+         main 264(sp)       Preserve x28 
+         main 256(sp)       Preserve x27
+         main 248(sp)       <apparently unused>
+-244     main 44(sp)        Base of employee array
+         main 40(sp)        Store 0
+         main 36(sp)        Store argc (w0)
+         main 32(sp)        <apparently unused>
+         main 24(sp)        Store argv (x1)
+         main 16(sp)        Store location of Employees (sp + 44)
+         main 12(sp)        Initialized to 0 (later passed as 2nd parameter to edit_employees)
+         main 0(sp)         <apparently unused 12 bytes>
+ -288                       sp after entering main
+                           # sp <== sp - 80 upon entry
+         edit  72(sp)      Preserve x30 (Return address)
+         edit  64(sp)      Preserve x29 (Frame pointer) (This is also what the fp is set to for edit_employees)
+         edit -4(x29)      can_edit_record    (equal to 60(sp))
+ ***     edit -8(x29)      can_edit_salary    (equal to 56(sp))
+        edit -16(x29)      Employee* employee (equal to 48(sp))
+    	  edit -20(x29)      emp_num            (equal to 44(sp))
+          edit 40(sp)      <apparently unused>
+          edit 32(sp)      emp local variable (??)
+          edit 28(sp)      both_permissions 
+          edit 24(sp)      choice
+          edit  0(sp)      <apparently unused 12 bytes>
+  -368                     sp after entering edit_employee (if no extra space) 
+       
+*** Location of "employee[-1]" if no stack alignment. 
