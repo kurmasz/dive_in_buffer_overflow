@@ -1,0 +1,32 @@
+
+!!! This need to be re-done !!!
+
+Answer to #1 when compiled using clang on an x86 mac.
+Notice that the placement of parameters on the stack  is not in the order they appear in the code.
+The idea of the "dummy" data was to help students see what parts of the stack were modified.  However,
+since the parameters weren't placed in order, these "guideposts" may not be as useful as I had hoped.
+
+
+stack    addr as shown
+         in assembly 
+   0                         rsp when entering main 
+  -8                         rbp pushed to begin main / rbp for main
+ -16     main -8(rbp)        stack check for main 
+                             employees[2]
+                             employees[1]
+                             employees[0]
+-232     main -224(rbp)      Beginning of employee array
+         main -228(rbp)      0
+         main -232(rbp)      argc   
+-248     main -240(rbp)      argv / rsp after setting up main
+-256                         return address for edit_employees function ("edit")
+-264                         rbp pushed to begin edit_employees / rbp for "edit"
+-272       edit -8(rbp)      stack check for "edit"
+-280      edit -16(rbp)      message1 
+-288      edit -24(rbp)      message2
+-296      edit -32(rbp)      Employee* variable
+-300      edit -36(rbp)      choice variable
+-304      edit -40(rbp)      emp_num variable 
+-320      edit -56(rbp)      Employee array pointer parameter
+-324      edit -60(rbp)      can_edit_salary parameter
+-328      edit -64(rbp)      rsp after setting up edit_employees  
